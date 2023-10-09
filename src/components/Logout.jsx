@@ -2,8 +2,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Logout = () => {
+
   const [UserId, setUserId] = useState();
   // const [Phone, setPhone] = useState();
   const sessionLogin = () => {
@@ -42,6 +44,7 @@ const Logout = () => {
           // text: "silahkan isi Kode Otp dibawah ini",
           // });
           console.log(response?.data?.messages);
+          sessionStorage.clear();
         } else {
           // info2();
           console.log("logout gagal");
@@ -49,9 +52,32 @@ const Logout = () => {
       });
   };
 
+  const alertYakin = () => {
+    Swal.fire({
+      title: 'Apa kamu yakin ?',
+      text: "Kamu akan Logout dan harus Login kembali !",
+      icon: 'warning',
+      showCancelButton: true,
+      preConfirm: () => clickLogout(),
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, saya yakin'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          // () => clickLogout(),
+          'Logout!',
+          'Kamu berhasil Logout',
+          'success'
+        )
+      }
+    })
+  }
+  
+
   return (
     <div>
-      <button onClick={() => clickLogout()}>logout</button>
+      <button onClick={() => alertYakin()}>logout</button>
     </div>
   );
 };

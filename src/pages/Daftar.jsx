@@ -127,12 +127,9 @@ const Daftar = () => {
   return (
     <>
       <div className="bg-white p-3 w-80 lg:w-96 m-auto shadow-2xl rounded-lg">
-        <div className="flex flex-row justify-evenly mb-4 lg:mb-6">
+        <div className="flex flex-row justify-center mb-4 lg:mb-3">
           <p className="border-b-2 border-sky-500 text-sky-500 font-bold cursor-pointer pb-1">
             Daftar
-          </p>
-          <p onClick={() => navigate("/login")} className="cursor-pointer">
-            Login
           </p>
         </div>
 
@@ -142,7 +139,7 @@ const Daftar = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <div className="mb-1 lg:mb-3">
+            <div className="mb-1 lg:mb-2">
               <label htmlFor="username" className="font-bold">
                 No Telepon :
               </label>
@@ -167,7 +164,7 @@ const Daftar = () => {
               {/* <p>{mesa}</p> */}
               {/* {noTelErr && <p>*Nomor Telepon Wajib menggunakan awalan "08"</p>} */}
             </Form.Item>
-            <div className="mb-1 lg:mb-3">
+            <div className="mb-1 lg:mb-2">
               <label className="font-bold">Password</label>
             </div>
             <Form.Item
@@ -189,7 +186,7 @@ const Daftar = () => {
               {/* {pwdError && <p>*Password harus di isi Minimal 6 karakter</p>} */}
             </Form.Item>
 
-            <div className="mb-1 lg:mb-3">
+            <div className="mb-1 lg:mb-2">
               <label className="font-bold pb-5">Konfirmasi Password</label>
             </div>
             <Form.Item
@@ -230,6 +227,17 @@ const Daftar = () => {
           >
             Daftar
           </Button>
+        </div>
+        <div className="flex flex-row justify-center text-xs mt-3">
+          <p>
+            sudah punya akun ? 
+          </p>
+          <p className="cursor-pointer ml-1 text-sky-500 font-bold" onClick={() => navigate("/login")}>
+            Login
+          </p>
+          <p className="ml-1">
+            sekarang
+          </p>
         </div>
       </div>
     </>

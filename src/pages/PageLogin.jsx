@@ -16,8 +16,8 @@ import Login from "./Login";
 export default function PageLogin() {
   return (
     <>
-      <body className="bg-sky-200 h-full w-full">
-        <nav className="flex justify-between mb-32 lg:mb-24 px-5 lg:px-20 py-5 lg:py-6 font-bold text-sm lg:text-lg ">
+      <body className="bg-sky-200 lg:h-screen md:h-screen h-full w-full">
+        <nav className="flex justify-between mb-32 md:mb-52 lg:mb-20 px-5 lg:px-20 py-5 md:py-10 lg:py-6 font-bold text-sm md:text-base lg:text-lg ">
           <div className="flex flex-row items-center">
             <img src={logo} alt="" className="w-8 lg:w-10 mr-3 lg:mr-5" />
             <p>KlabBelanja</p>
@@ -33,11 +33,13 @@ export default function PageLogin() {
             </p>
           </div>
         </nav>
+        {/* <div className="flex justify-center self-center"> */}
 
         <Login />
+        {/* </div> */}
 
-        <footer className="flex justify-between mt-36 lg:mt-24 px-5 lg:px-20 py-5 lg:py-6 font-bold text-sm lg:text-lg">
-          <div className="flex flex-col lg:flex-row lg:items-center">
+        <footer className="flex justify-between mt-36 lg:mt-20 px-5 lg:px-20 py-5 md:py-10 lg:py-6 font-bold text-sm md:text-base lg:text-lg sticky top-[100vh]">
+          <div className="flex flex-col md:flex-row lg:flex-row lg:items-center">
             <p className="lg:mr-5">
               @2023 klabbelanja
             </p>

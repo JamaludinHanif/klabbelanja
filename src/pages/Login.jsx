@@ -141,7 +141,8 @@ const Login = () => {
 
   return (
     <>
-      <div className="bg-white p-3 w-80 lg:w-96 m-auto shadow-2xl rounded-lg">
+    <body className="flex justify-center items-center">
+    <div className="bg-white p-3 w-80 md:w-4/6 lg:w-96 shadow-2xl rounded-lg">
         {/* navlogin */}
         <div className="flex justify-center mb-4 lg:mb-6">
           <p className="border-b-2 border-sky-500 text-sky-500 font-bold cursor-pointer pb-1">
@@ -208,20 +209,22 @@ const Login = () => {
             Login
           </Button>
         </div>
-        <div className="">
+        <div className="flex flex-row justify-center text-xs mt-3">
           <p>
             belum punya akun ? 
           </p>
-          <p className="cursor-pointer" onClick={() => navigate("/daftar")}>
+          <p className="cursor-pointer ml-1 text-sky-500 font-bold" onClick={() => navigate("/daftar")}>
             Daftar
           </p>
-          <p>
+          <p className="ml-1">
             sekarang
           </p>
         </div>
         {contextHolder}
         {contextHolder2}
       </div>
+    </body>
+
     </>
   );
 };

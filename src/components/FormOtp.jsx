@@ -29,9 +29,9 @@ const FormOtp = () => {
   });
 
   // direct ke halaman otp
-  const navigate = useState();
+  const navigate = useNavigate();
   const directHomePage = () => {
-    navigate("/otp");
+    navigate("/");
   };
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -158,7 +158,7 @@ const FormOtp = () => {
 
   return (
     <>
-      <div className="bg-white p-3 w-80 lg:w-96 m-auto shadow-2xl rounded-lg">
+      <div className="bg-white p-3 w-80 md:w-4/6 lg:w-96 m-auto shadow-2xl rounded-lg">
         {/* navlogin */}
 
         <div className="">
