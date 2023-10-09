@@ -17,7 +17,7 @@ import Daftar from "./Daftar";
 export default function PageSign() {
   return (
     <>
-      <body className="bg-sky-200 h-full w-full">
+      <body className="bg-sky-200 h-screen w-full">
         <nav className="flex justify-between mb-24 lg:mb-12 px-5 lg:px-20 py-5 lg:py-6 font-bold text-sm lg:text-lg ">
           <div className="flex flex-row items-center">
             <img src={logo} alt="" className="w-8 lg:w-10 mr-3 lg:mr-5" />
@@ -35,7 +35,7 @@ export default function PageSign() {
 
         <Daftar />
 
-        <footer className="flex justify-between mt-24 lg:mt-12 px-5 lg:px-20 py-5 lg:py-6 font-bold text-sm lg:text-lg">
+        <footer className="flex justify-between mt-24 lg:mt-12 px-5 lg:px-20 py-5 lg:py-6 font-bold text-sm lg:text-lg sticky top-[100vh]">
           <div className="flex flex-col lg:flex-row lg:items-center">
             <p className="lg:mr-5">
               <a href="#">@2023 klabbelanja</a>

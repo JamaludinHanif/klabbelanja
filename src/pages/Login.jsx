@@ -23,14 +23,14 @@ const Login = () => {
     messageApi.info({
       type: "info",
       content: "silahkan isi data dengan lengkap",
-      style: { marginTop: "70vh" },
+      // style: { marginTop: "70vh" },
     });
   };
   const info2 = () => {
     messageApi2.info({
       type: "error",
       content: "Password yang dimasukan salah",
-      style: { marginTop: "70vh" },
+      // style: { marginTop: "70vh" },
     });
   };
 
