@@ -2,9 +2,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import PageSign from "./pages/PageSign"
 import PageLogin from "./pages/PageLogin"
-import Home from "./pages/HomePage"
 import Vendor from "./pages/Vendor"
 import PageOtp from "./pages/PageOtp"
+import HomePage from "./pages/HomePage"
+import ProdukTes from "./pages/ProdukPageTes"
 
 
 export default function App() {
@@ -17,7 +18,8 @@ export default function App() {
 
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/tes" element={<ProdukTes />} />
           <Route path="/vendor/:id" element={<Vendor />} />
           <Route path="/otp" element={<PageOtp />} />
           <Route path="/login" element={<PageLogin />} />

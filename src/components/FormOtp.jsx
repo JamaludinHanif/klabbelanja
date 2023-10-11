@@ -1,12 +1,20 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+
+// libraries react
 import { useEffect, useState } from "react";
+
+// libraries
 import axios from "axios";
 import { Button, message, Form, Input } from "antd";
-import CountDownOtp from "./CountDownOtp";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
+// components
+import CountDownOtp from "./CountDownOtp";
+
+
+// ant desain
 const onFinish = (values) => {
   console.log("Success:", values);
 };
@@ -15,6 +23,7 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const FormOtp = () => {
+
   // Sweet Alert 2
   const Toast = Swal.mixin({
     toast: true,
@@ -34,6 +43,7 @@ const FormOtp = () => {
     navigate("/");
   };
 
+  // ant desain {messages}
   const [messageApi, contextHolder] = message.useMessage();
   const [messageApi2, contextHolder2] = message.useMessage();
   const info = () => {
@@ -51,6 +61,7 @@ const FormOtp = () => {
     });
   };
 
+  // sessionStorage system
   const [UserToken, setUserToken] = useState();
   const [Phone, setPhone] = useState();
   const sessionLogin = () => {
@@ -63,7 +74,7 @@ const FormOtp = () => {
   };
   let userTokens = UserToken;
   let userPhones = Phone;
-  console.log("Sebuah data dari session: ", userTokens);
+  // console.log("Sebuah data dari session: ", userTokens);
   sessionStorage.setItem("Token User", userTokens);
   sessionStorage.setItem("Phone user", userPhones);
 
@@ -71,16 +82,17 @@ const FormOtp = () => {
     sessionLogin();
   }, []);
 
+
   // state
   const [Otp, setOtp] = useState("");
 
   // state error
   const [PhoneErr, setPhoneErr] = useState(false);
   const [OtpErr, setOtpErr] = useState(false);
-
   const [PhoneErrMsg, setPhoneErrMsg] = useState("");
   const [OtpErrMsg, setOtpErrMsg] = useState("");
 
+  // validation
   const validation = () => {
     let x = false;
     if (!Otp) {
@@ -94,11 +106,11 @@ const FormOtp = () => {
     return x;
   };
 
+
+  // integrasi API send OTP (verify)
   const configToken = {
     headers: { Authorization: `Bearer ${userTokens}` },
   };
-
-  // integrasi API Register
   const otpInput = async () => {
     if (validation()) {
       let body = {
@@ -113,13 +125,23 @@ const FormOtp = () => {
           configToken
         )
         .then((response) => {
-          console.log(`Ini response dari API Login: `, response?.data);
+          // console.log(`Ini response dari API Login: `, response?.data);
           if (response?.data?.status == true) {
             Toast.fire({
               icon: "success",
               title: response?.data.messages,
-              // text: "silahkan isi Kode Otp dibawah ini",
             });
+
+            // sessionStorage System
+            let valueSetStatus = JSON.stringify(response?.data?.status);
+            sessionStorage.setItem("data verify1", valueSetStatus);
+            let valueSetData = JSON.stringify(response?.data?.data);
+            sessionStorage.setItem("data verify2", valueSetData);
+            let valueSetKey = JSON.stringify(response?.data?.key);
+            sessionStorage.setItem("data verify3", valueSetKey);
+            let valueSetCode = JSON.stringify(response?.data?.code);
+            sessionStorage.setItem("data verify4", valueSetCode);
+
           } else {
             info2();
           }
@@ -128,13 +150,15 @@ const FormOtp = () => {
           }
         })
         .catch((err) => {
-          console.error("Terjadi Kesalahan: ", err);
+          // console.error("Terjadi Kesalahan: ", err);
         });
     } else {
       info();
     }
   };
 
+
+  // integrasi API resend OTP
   const reSendOtp = async () => {
     await axios
       .get(
@@ -142,7 +166,7 @@ const FormOtp = () => {
         configToken
       )
       .then((response) => {
-        console.log(`ini response dari resend OTP`, response?.data);
+        // console.log(`ini response dari resend OTP`, response?.data);
         if (response?.data?.status == true) {
           console.log("resend otp berhasil");
         } else {
@@ -154,8 +178,7 @@ const FormOtp = () => {
       });
   };
 
-  // console.log("ini phone", Phone);
-
+  
   return (
     <>
       <div className="bg-white p-3 w-80 md:w-4/6 lg:w-96 m-auto shadow-2xl rounded-lg">

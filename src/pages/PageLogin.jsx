@@ -1,8 +1,13 @@
 /* eslint-disable no-unused-vars */
+
+// libraries react
+import { useEffect } from "react";
+
 // libraries
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-// from foto
+// images
 import logo from "../images/klabbelanjalogo.png";
 import facebook from "../images/facebook.png";
 import browser from "../images/browser.png";
@@ -14,6 +19,22 @@ import twitter from "../images/twitter.png";
 import Login from "./Login";
 
 export default function PageLogin() {
+  
+  // routing
+  const navigate = useNavigate()
+
+  // middleware
+  const loggedIn = sessionStorage.getItem("data verify2")
+  // console.log(loggedIn)
+
+  useEffect(() => {
+    if (loggedIn !== null ){
+     navigate("/")
+    } else {
+      navigate('/login')
+    }
+},[])
+
   return (
     <>
       <body className="bg-sky-200 lg:h-screen md:h-screen h-full w-full">
@@ -33,10 +54,8 @@ export default function PageLogin() {
             </p>
           </div>
         </nav>
-        {/* <div className="flex justify-center self-center"> */}
 
         <Login />
-        {/* </div> */}
 
         <footer className="flex justify-between mt-36 lg:mt-20 px-5 lg:px-20 py-5 md:py-10 lg:py-6 font-bold text-sm md:text-base lg:text-lg sticky top-[100vh]">
           <div className="flex flex-col md:flex-row lg:flex-row lg:items-center">

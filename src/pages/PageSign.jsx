@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 
-// libraries
-import { Link } from "react-router-dom";
+// libraries react
+import { useEffect } from "react";
 
-// Photos
+// libraries
+import { Link, useNavigate } from "react-router-dom";
+
+// images
 import logo from "../images/klabbelanjalogo.png";
 import facebook from "../images/facebook.png";
 import browser from "../images/browser.png";
@@ -15,6 +18,22 @@ import twitter from "../images/twitter.png";
 import Daftar from "./Daftar";
 
 export default function PageSign() {
+
+  // routing
+  const navigate = useNavigate()
+
+  // middleware
+  const loggedIn = sessionStorage.getItem("data verify2")
+  // console.log(loggedIn)
+
+  useEffect(() => {
+    if (loggedIn !== null ){
+     navigate("/")
+    } else {
+      navigate('/daftar')
+    }
+},[])
+
   return (
     <>
       <body className="bg-sky-200 h-screen w-full">

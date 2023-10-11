@@ -3,14 +3,18 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
+
+// libraries react
 import React from "react";
 import { useState } from "react";
+
+// libraries
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
+// ant desain
 const onFinish = (values) => {
   console.log("Success:", values);
 };
@@ -19,6 +23,7 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const Daftar = () => {
+
   // Sweet Alert 2
   const Toast = Swal.mixin({
     toast: true,
@@ -32,6 +37,7 @@ const Daftar = () => {
     },
   });
 
+  // Routing
   const navigate = useNavigate();
   const directOtp = () => {
     navigate("/otp");
@@ -52,6 +58,7 @@ const Daftar = () => {
   const [IsVerifPwError, setIsVerifPwError] = useState(false);
   const [IsMsgVerifPwError, setIsMsgVerifPwError] = useState("");
 
+  // validation
   const validation = () => {
     let x = false;
     if (!Phone) {
@@ -94,7 +101,7 @@ const Daftar = () => {
       await axios
         .post(`http://api-uat.klabbelanja.id/api/v1/auth/register`, body)
         .then((response) => {
-          console.log(`Ini response dari API Register: `, response?.data);
+          // console.log(`Ini response dari API Register: `, response?.data);
           if (response?.data?.status == true) {
             Toast.fire({
               icon: "success",
@@ -156,13 +163,9 @@ const Daftar = () => {
             >
               <Input
                 value={Phone}
-                // onFocus={handleClick}
-                // onFocus={value={}}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Masukan nomor telepon/Anggota kamu"
               />
-              {/* <p>{mesa}</p> */}
-              {/* {noTelErr && <p>*Nomor Telepon Wajib menggunakan awalan "08"</p>} */}
             </Form.Item>
             <div className="mb-1 lg:mb-2">
               <label className="font-bold">Password</label>
@@ -179,11 +182,9 @@ const Daftar = () => {
             >
               <Input.Password
                 value={Password}
-                // onFocus={handleClickPw}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Masukan password kamu"
               />
-              {/* {pwdError && <p>*Password harus di isi Minimal 6 karakter</p>} */}
             </Form.Item>
 
             <div className="mb-1 lg:mb-2">

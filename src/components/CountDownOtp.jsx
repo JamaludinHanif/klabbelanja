@@ -1,7 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+
+// libraries react
 import React, { useState, useEffect } from 'react';
-// import { SweetAlert2 } from 'sweetalert2-react-content';
+
+// libraries
 import Swal from 'sweetalert2';
 
 const CountDownOtp = () => {

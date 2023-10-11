@@ -1,14 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
+
+// libraries react
 import React, { useState, useEffect } from "react";
+
+// libraries
 import { Button, message, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-// import withReactContent from "sweetalert2-react-content";
-// import { data } from "autoprefixer";
-// import { validNoTel, validPassword } from "../components/regex";
 
+// ant desain
 const onFinish = (values) => {
   console.log("Success:", values);
 };
@@ -17,6 +19,7 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const Login = () => {
+  // ant desain (messages)
   const [messageApi, contextHolder] = message.useMessage();
   const [messageApi2, contextHolder2] = message.useMessage();
   const info = () => {
@@ -59,7 +62,12 @@ const Login = () => {
     },
   });
 
+  // router
   const navigate = useNavigate();
+  // direct ke halaman otp
+  const directOtp = () => {
+    navigate("/otp");
+  };
 
   //state
   const [Phone, setPhone] = useState("");
@@ -72,6 +80,7 @@ const Login = () => {
   const [IsPasswordError, setIsPasswordError] = useState(false);
   const [IsMsgPasswordError, setIsMsgPasswordError] = useState("");
 
+  // validation
   const validation = () => {
     let x = false;
     if (!Phone) {
@@ -94,7 +103,7 @@ const Login = () => {
     return x;
   };
 
-  //   integrasi API Register
+  //   integrasi API Login
   const register = async () => {
     if (validation()) {
       let body = {
@@ -102,15 +111,10 @@ const Login = () => {
         password: `${Password}`,
       };
 
-      // direct ke halaman otp
-      const directOtp = () => {
-        navigate("/otp");
-      };
-
       await axios
         .post(`http://api-uat.klabbelanja.id/api/v1/auth/login`, body)
         .then((response) => {
-          console.log(`Ini response dari API Login: `, response?.data);
+          // console.log(`Ini response dari API Login: `, response?.data);
           if (response?.data?.status == true) {
             ToastLoginSucces.fire({
               icon: "success",
@@ -120,11 +124,6 @@ const Login = () => {
             let valueLogin = JSON.stringify(response?.data?.data);
             sessionStorage.setItem("data login", valueLogin);
           } else {
-            // Toast.fire({
-            //   icon: "info",
-            //   title: response?.data.messages,
-            // });
-            // info2()
             message.error(response?.data.messages);
           }
           if (response?.data?.status == true) {
@@ -141,90 +140,88 @@ const Login = () => {
 
   return (
     <>
-    <body className="flex justify-center items-center">
-    <div className="bg-white p-3 w-80 md:w-4/6 lg:w-96 shadow-2xl rounded-lg">
-        {/* navlogin */}
-        <div className="flex justify-center mb-4 lg:mb-6">
-          <p className="border-b-2 border-sky-500 text-sky-500 font-bold cursor-pointer pb-1">
-            Login
-          </p>
-        </div>
+      <body className="flex justify-center items-center">
+        <div className="bg-white p-3 w-80 md:w-4/6 lg:w-96 shadow-2xl rounded-lg">
+          {/* navlogin */}
+          <div className="flex justify-center mb-4 lg:mb-6">
+            <p className="border-b-2 border-sky-500 text-sky-500 font-bold cursor-pointer pb-1">
+              Login
+            </p>
+          </div>
 
-        <div className="">
-          <Form
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
-            <div className="mb-1 lg:mb-3">
-              <label htmlFor="username" className="font-bold pb-5">
-                No Telepon / Nomor Anggota :
-              </label>
-            </div>
-            <Form.Item
-              name="username"
-              id="username"
-              rules={[
-                {
-                  required: true,
-                  message: "Tolong isi nomor Telepon anda!",
-                },
-              ]}
+          <div className="">
+            <Form
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
             >
-              <Input
-                value={Phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Masukan nomor telepon/Anggota kamu"
-              />
-            </Form.Item>
+              <div className="mb-1 lg:mb-3">
+                <label htmlFor="username" className="font-bold pb-5">
+                  No Telepon / Nomor Anggota :
+                </label>
+              </div>
+              <Form.Item
+                name="username"
+                id="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Tolong isi nomor Telepon anda!",
+                  },
+                ]}
+              >
+                <Input
+                  value={Phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Masukan nomor telepon/Anggota kamu"
+                />
+              </Form.Item>
 
-            <div className="mb-1 lg:mb-3">
-              <label htmlFor="password" className="font-bold pb-5">
-                Password
-              </label>
-            </div>
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Password harus di isi",
-                },
-              ]}
+              <div className="mb-1 lg:mb-3">
+                <label htmlFor="password" className="font-bold pb-5">
+                  Password
+                </label>
+              </div>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Password harus di isi",
+                  },
+                ]}
+              >
+                <Input.Password
+                  id="password"
+                  value={Password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Masukan password kamu"
+                />
+              </Form.Item>
+            </Form>
+            <Button
+              type="primary"
+              htmlType="submit"
+              onClick={() => register()}
+              className="w-full bg-sky-500"
             >
-              <Input.Password
-                id="password"
-                value={Password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Masukan password kamu"
-              />
-            </Form.Item>
-          </Form>
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={() => register()}
-            className="w-full bg-sky-500"
-          >
-            Login
-          </Button>
+              Login
+            </Button>
+          </div>
+          <div className="flex flex-row justify-center text-xs mt-3">
+            <p>belum punya akun ?</p>
+            <p
+              className="cursor-pointer ml-1 text-sky-500 font-bold"
+              onClick={() => navigate("/daftar")}
+            >
+              Daftar
+            </p>
+            <p className="ml-1">sekarang</p>
+          </div>
+          {contextHolder}
+          {contextHolder2}
         </div>
-        <div className="flex flex-row justify-center text-xs mt-3">
-          <p>
-            belum punya akun ? 
-          </p>
-          <p className="cursor-pointer ml-1 text-sky-500 font-bold" onClick={() => navigate("/daftar")}>
-            Daftar
-          </p>
-          <p className="ml-1">
-            sekarang
-          </p>
-        </div>
-        {contextHolder}
-        {contextHolder2}
-      </div>
-    </body>
-
+      </body>
     </>
   );
 };

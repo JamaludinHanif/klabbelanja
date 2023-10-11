@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 
-// libraries
-import { Link } from "react-router-dom";
+// libraries react
+import { useEffect } from "react";
 
-// Photos
+// libraries
+import { Link, useNavigate } from "react-router-dom";
+
+// Images
 import logo from "../images/klabbelanjalogo.png";
 import facebook from "../images/facebook.png";
 import browser from "../images/browser.png";
@@ -12,10 +15,25 @@ import playStore from "../images/playstore.png";
 import twitter from "../images/twitter.png";
 
 // components
-import Daftar from "./Daftar";
 import FormOtp from "../components/FormOtp";
 
 export default function PageOtp() {
+
+  // routing
+  const navigate = useNavigate()
+
+  // middleware
+  const loggedIn = sessionStorage.getItem("data verify2")
+  // console.log(loggedIn)
+
+  useEffect(() => {
+    if (loggedIn !== null ){
+     navigate("/")   
+    } else {
+      navigate('/otp')
+    }
+},[])
+
   return (
     <>
       <body className="bg-sky-200 h-screen w-full">
